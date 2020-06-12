@@ -3,9 +3,9 @@ import {BrowserRouter as Router} from 'react-router-dom';
 import ApplicationRoutes from './ApplicationRoutes';
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import {  faChevronDown } from '@fortawesome/free-solid-svg-icons'
+import {  faHeart } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faChevronDown)
+library.add(faHeart)
 
 export default class App extends Component {
 
