@@ -3,9 +3,11 @@ import {BrowserRouter as Router} from 'react-router-dom';
 import ApplicationRoutes from './ApplicationRoutes';
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import {  faHeart } from '@fortawesome/free-solid-svg-icons'
+ import {  faHeart as faHeartSolid} from '@fortawesome/free-solid-svg-icons'
+import {  faHeart as faHeartRegular} from '@fortawesome/free-regular-svg-icons'
 
-library.add(faHeart)
+library.add(faHeartSolid);
+library.add(faHeartRegular);
 
 export default class App extends Component {
 

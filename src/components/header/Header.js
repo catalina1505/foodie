@@ -11,7 +11,7 @@ export default function Header(props) {
     return (
         <Grid container>
                 <section style={{backgroundImage: `url(${Pizza})` }}></section>
-<img src={'Pizza'} alt={"pizza"}/>
+                <img src={'Pizza'} alt={"pizza"}/>
         </Grid>
     )
 }
