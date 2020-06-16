@@ -11,6 +11,7 @@ export default function RestaurantsList() {
     // const [restaurantsWithId, setRestaurantsWithId] = useState([])
     const [stateOrderedRestaurants, setStateOrderedRestaurants] = useState([]);
     const [searchString, setSearchString] = useState('');
+    const [select, setSelect] = useState('');
     const [filtered, setFiltered] = useState([]);
     const [fav, setFav] = useState([]);
 
@@ -25,12 +26,23 @@ export default function RestaurantsList() {
         // let id = makeCounter();
         // restaurants.restaurants.map((el => restaurantsWithId.push({ ...el, id: id() })))
 
-        setStateOrderedRestaurants({
-            stateOrderedRestaurants: restaurants.restaurants.sort(function (a, b) {
-                if (a.status < b.status) { return 0; }
-                return a.status > b.status ? -1 : 1
-            })
+        //!!!ALSO FAVORITES MUST BE ORDERED BY STATE
+
+        const x = restaurants.restaurants.sort(function (a, b) {
+            if (a.status === b.status) { return 0; }
+            return a.status > b.status ? -1 : 1
         })
+
+        const z = []
+
+        const open = x.map((el => el.status === "open" ? z.push(el) : ""))
+        const order = x.map((el => el.status === "order ahead" ? z.push(el) : ""))
+        const closed = x.map((el => el.status === "closed" ? z.push(el) : ""))
+
+        setStateOrderedRestaurants({
+            stateOrderedRestaurants: z
+        });
+
     }, []);
 
 
@@ -53,19 +65,20 @@ export default function RestaurantsList() {
         stateOrderedRestaurants.stateOrderedRestaurants.push(favRestaurant[0])
     }
 
-    console.log("fav", fav)
-    console.log("stateOrderedRestaurants.stateOrderedRestaurants", stateOrderedRestaurants.stateOrderedRestaurants)
+    console.log("filtered", filtered)
 
     return (
 
         <div className="list-root">
             {/* <Header /> */}
-            <Filters availabilityOptions={stateOrderedRestaurants.stateOrderedRestaurants}
+            <Filters 
                 searchString={searchString}
                 setSearchString={setSearchString}
                 restaurants={stateOrderedRestaurants.stateOrderedRestaurants}
                 setFiltered={setFiltered}
-                filtered={filtered} />
+                filtered={filtered}
+                select={select}
+                setSelect={setSelect} />
             <Restaurant removeFromFav={removeFromFav} addToFav={addToFav} fav={fav} data={searchString.length < 1 ? stateOrderedRestaurants.stateOrderedRestaurants : filtered} />
         </div>
     )
