@@ -8,27 +8,22 @@ import './RestaurantsList.scss';
 
 export default function RestaurantsList() {
 
-    // const [restaurantsWithId, setRestaurantsWithId] = useState([])
+    const [topRestaurantsAdded, setTopRestaurantsAdded] = useState([]);
     const [stateOrderedRestaurants, setStateOrderedRestaurants] = useState([]);
     const [searchString, setSearchString] = useState('');
     const [select, setSelect] = useState('');
     const [filtered, setFiltered] = useState([]);
     const [fav, setFav] = useState([]);
 
-    //ordered the data from the json by state
     useEffect(() => {
-        // const makeCounter = () => {
-        //     var i = 0;
-        //     return function () {
-        //         return i++;
-        //     }
-        // }
-        // let id = makeCounter();
-        // restaurants.restaurants.map((el => restaurantsWithId.push({ ...el, id: id() })))
+        //add topRestaurants to the data
+        restaurants.restaurants.map((el =>  topRestaurantsAdded.push({...el, 
+            ...el.sortingValues.topRestaurants = (el.sortingValues.distance * el.sortingValues.popularity) + el.sortingValues.ratingAverage })));
 
         //!!!ALSO FAVORITES MUST BE ORDERED BY STATE
 
-        const x = restaurants.restaurants.sort(function (a, b) {
+        //sort the new data based on state
+        const x = topRestaurantsAdded.sort(function (a, b) {
             if (a.status === b.status) { return 0; }
             return a.status > b.status ? -1 : 1
         })
@@ -43,8 +38,10 @@ export default function RestaurantsList() {
             stateOrderedRestaurants: z
         });
 
+
     }, []);
 
+    console.log("select", select);
 
 
     const addToFav = (i) => {

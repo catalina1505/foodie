@@ -4,7 +4,8 @@ import {
     MenuItem,
     FormControl,
     Select,
-    Input
+    Input,
+    InputLabel
 } from '@material-ui/core';
 
 import './Filters.scss';
@@ -44,11 +45,12 @@ export default function Restaurant(props) {
 
             <Grid item md={6} xs={12}>
                 <FormControl className='form-control'>
+                <InputLabel htmlFor="name-multiple">{props.restaurants && Object.keys(props.restaurants[0].sortingValues).map(((el => el)))[0]}</InputLabel>
+{/* try to use native select */}
                     <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
+                        labelId="simple-select-label"
+                        id="simple-select"
                         value={props.select}
-                        defaultValue={"bestMatch"}
                         onChange={handleChangeSelect}
                         >
                         {props.restaurants && Object.keys(props.restaurants[0].sortingValues).map(((el, i) => <MenuItem key={i} value={el}>{el}</MenuItem>))})}
