@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Restaurant from '../../../components/restaurant/Restaurant';
-import Filters from './Filters';
-import Header from '../../../components/header/Header'
+import Filters from '../../../components/Filters/Filters';
 
 import restaurants from '../../../utils/Sample - Restaurant list - technical assignment (PHP_Javascript).json';
 import './RestaurantsList.scss';
@@ -67,7 +66,6 @@ export default function RestaurantsList() {
     return (
 
         <div className="list-root">
-            {/* <Header /> */}
             <Filters 
                 searchString={searchString}
                 setSearchString={setSearchString}
