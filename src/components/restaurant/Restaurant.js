@@ -23,7 +23,7 @@ export default function Restaurant(props) {
                             <Typography className='title' color="textSecondary" gutterBottom> {el.status}</Typography>
                         </CardContent>
                         <CardActions>
-                            <Button onClick={() => props.removeFromFav(index)}>
+                            <Button onClick={() => props.removeFromFavorites(index)}>
                                 <span><FontAwesomeIcon icon={["fas", "heart"]} /> Favorite</span>
                             </Button>
                         </CardActions>
@@ -31,7 +31,7 @@ export default function Restaurant(props) {
                 </Grid>)}
 
             {/* list the restaurants that are not marked as favorites */}
-            {props.data && props.data.map((el, index) =>
+            {props.data && props.data.length > 0 && props.data.map((el, index) =>
                 <Grid item xs={12} key={index}>
                     <Card>
                         <CardContent>
@@ -39,7 +39,7 @@ export default function Restaurant(props) {
                             <Typography className='title' color="textSecondary" gutterBottom> {el.status}</Typography>
                         </CardContent>
                         <CardActions>
-                            <Button onClick={() => props.addToFav(index)}>
+                            <Button onClick={() => props.addToFavorites(index)}>
                                 <span><FontAwesomeIcon icon={["far", "heart"]} /></span>
                             </Button>
                         </CardActions>
