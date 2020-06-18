@@ -25,7 +25,7 @@ export default function RestaurantsList() {
         })));
 
         //sortbyState
-        sortByState(topRestaurantsAdded, open, orderAhead, closed)
+        sortByState(topRestaurantsAdded, open, orderAhead, closed);
 
         setStateOrderedRestaurants({
             stateOrderedRestaurants: topRestaurantsAdded
@@ -33,12 +33,13 @@ export default function RestaurantsList() {
 
         //sort by bestMatch by default
         setSelect('bestMatch')
-        const sortedByBestMatch = sortedBySelect(open, orderAhead, closed)
+        const sortedByBestMatch = sortedBySelect(open, orderAhead, closed);
 
-        setFiltered(sortedByBestMatch)
+        setFiltered(sortedByBestMatch);
 
-    }, [topRestaurantsAdded]);
+    }, []);
 
+    //take in consideration useCallback
 
     const sortedBySelect = (x, y, z) => {
 
@@ -85,8 +86,8 @@ export default function RestaurantsList() {
         let closedFavorites = [];
 
         newListFavorites.push(...fav, favRestaurant[0]);
-        let sortedFavoritesByState = sortByState(newListFavorites, openFavorites, orderAheadFavorites, closedFavorites);
-        setFav(sortedFavoritesByState);
+        sortByState(newListFavorites, openFavorites, orderAheadFavorites, closedFavorites);
+        setFav(sortedBySelect(openFavorites, orderAheadFavorites, closedFavorites));
     }
 
     const removeFromFavorites = (i) => {
@@ -101,8 +102,8 @@ export default function RestaurantsList() {
         let closedRestaurants = [];
 
         newListStateOrderedRestaurants.push(...filtered, favRestaurant[0]);
-        let sortedRestaurantsByState = sortByState(newListStateOrderedRestaurants, openRestaurants, orderAheadRestaurants, closedRestaurants)
-        setFiltered(sortedRestaurantsByState);
+        sortByState(newListStateOrderedRestaurants, openRestaurants, orderAheadRestaurants, closedRestaurants);
+        setFiltered(sortedBySelect(openRestaurants, orderAheadRestaurants, closedRestaurants));
     }
 
     return (

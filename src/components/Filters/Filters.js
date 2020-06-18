@@ -6,7 +6,6 @@ import {
     Select,
     Input
 } from '@material-ui/core';
-
 import './Filters.scss';
 
 export default function Restaurant(props) {
@@ -28,8 +27,8 @@ export default function Restaurant(props) {
 
     const handleChangeSelect = (e) => {
         props.setSelect(e.target.value);
-        const x = props.sortedBySelect(props.open, props.orderAhead, props.closed)
-        props.setFiltered(x)
+        const x = props.sortedBySelect(props.open, props.orderAhead, props.closed);
+        props.setFiltered(x);
     }
 
     return (
