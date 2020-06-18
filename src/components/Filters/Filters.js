@@ -38,7 +38,7 @@ export default function Restaurant(props) {
     }
 
     return (
-        <Grid container className="filters-root" justify='space-between'>
+        <Grid container className="filters-root">
             <Grid item md={6} xs={12}>
                 <Input type="text" placeholder="Search.." onChange={e => handleChangeSearch(e.target.value)} value={props.searchString} className='search-input' />
             </Grid>

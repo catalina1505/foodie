@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Restaurant from '../../../components/restaurant/Restaurant';
-import Filters from '../../../components/Filters/Filters';
-
+import Filters from '../../../components/filters/Filters';
 import restaurants from '../../../utils/Sample - Restaurant list - technical assignment (PHP_Javascript).json';
 import './RestaurantsList.scss';
 
@@ -16,57 +15,62 @@ export default function RestaurantsList() {
 
     useEffect(() => {
         //add topRestaurants to the data
-        restaurants.restaurants.map((el =>  topRestaurantsAdded.push({...el, 
-            ...el.sortingValues.topRestaurants = (el.sortingValues.distance * el.sortingValues.popularity) + el.sortingValues.ratingAverage })));
+        restaurants.restaurants.map((el => topRestaurantsAdded.push({
+            ...el,
+            ...el.sortingValues.topRestaurants = (el.sortingValues.distance * el.sortingValues.popularity) + el.sortingValues.ratingAverage
+        })));
 
-        //!!!ALSO FAVORITES MUST BE ORDERED BY STATE
-
-        //sort the new data based on state
-        const x = topRestaurantsAdded.sort(function (a, b) {
-            if (a.status === b.status) { return 0; }
-            return a.status > b.status ? -1 : 1
-        })
-
-        const z = []
-
-        const open = x.map((el => el.status === "open" ? z.push(el) : ""))
-        const order = x.map((el => el.status === "order ahead" ? z.push(el) : ""))
-        const closed = x.map((el => el.status === "closed" ? z.push(el) : ""))
+        sorting(topRestaurantsAdded)
 
         setStateOrderedRestaurants({
-            stateOrderedRestaurants: z
+            stateOrderedRestaurants: topRestaurantsAdded
         });
 
+    }, [topRestaurantsAdded]);
 
-    }, []);
 
-    console.log("select", select);
+    const sorting = (array) => {
+        //delete and add the restaurants with state open at the beginning of the array 
+        array.map((el => el.status === "order ahead" ? array.splice(array.indexOf(el), 1) && array.unshift(el) : ""));
 
+        //delete and add the restaurants with state closed at the end of the array 
+        array.map((el => el.status === "open" ? array.splice(array.indexOf(el), 1) && array.unshift(el) : ""))
+    }
 
     const addToFav = (i) => {
         //remove the restaurant from the array
         const favRestaurant = stateOrderedRestaurants.stateOrderedRestaurants.splice(i, 1);
         setStateOrderedRestaurants({ stateOrderedRestaurants: stateOrderedRestaurants.stateOrderedRestaurants.filter(item => item !== favRestaurant) })
 
-        //push favorite restaurants in an array 
-        fav.push(favRestaurant[0])
+        //push sorted favorite restaurants in an array 
+        const fav3 = [];
+
+        fav3.push(...fav, favRestaurant[0]) 
+        fav3.length > 1 && sorting(fav3)
+        setFav(fav3);
     }
 
     const removeFromFav = (i) => {
         //remove the restaurant from fav
         const favRestaurant = fav.splice(i, 1);
-        setFav(fav.filter(item => item !== favRestaurant))
+        setFav(fav.filter(item => item !== favRestaurant));
+
+        console.log("favFromRemove", fav)
 
         //push restaurant in the initial array 
-        stateOrderedRestaurants.stateOrderedRestaurants.push(favRestaurant[0])
+        const stateOrderedRestaurants2 = [];
+
+        stateOrderedRestaurants2.push(...stateOrderedRestaurants.stateOrderedRestaurants, favRestaurant[0]);
+        sorting(stateOrderedRestaurants2)
+        setStateOrderedRestaurants({ stateOrderedRestaurants: stateOrderedRestaurants2 });
+
+        console.log("stateOrderedRestaurants.stateOrderedRestaurants", stateOrderedRestaurants.stateOrderedRestaurants)
+
     }
 
-    console.log("filtered", filtered)
-
     return (
-
         <div className="list-root">
-            <Filters 
+            <Filters
                 searchString={searchString}
                 setSearchString={setSearchString}
                 restaurants={stateOrderedRestaurants.stateOrderedRestaurants}

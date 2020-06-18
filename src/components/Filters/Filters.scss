@@ -1,14 +1,14 @@
 .filters-root {
-    margin-top: 60px;
+    margin-top: 45px;
     margin-bottom: 70px;
+    display: flex;
 }
 
 .form-control {
     min-width: 200px !important;
-
 }
 
 .search-input {
-    min-width: 200px !important;
-
+    min-width: 200px;
+    margin-top: 15px;
 }
