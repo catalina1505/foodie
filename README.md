@@ -8,6 +8,8 @@ Installation:
 
 clone the repository: git clone https://github.com/catalina1505/foodie.git
   (https://help.github.com/articles/cloning-a-repository/);
+  
+cd foodie;
 
 npm install;
 
