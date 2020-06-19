@@ -6,7 +6,7 @@ Prerequisites: NodeJS (https://nodejs.org/en/)
 
 Installation:
 
-choose branch develop and clone the repository (https://help.github.com/articles/cloning-a-repository/);
+clone the repository (https://help.github.com/articles/cloning-a-repository/);
 
 npm install;
 
