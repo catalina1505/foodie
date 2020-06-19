@@ -39,7 +39,6 @@ export default function RestaurantsList() {
 
     }, []);
 
-    //take in consideration useCallback
 
     const sortedBySelect = (x, y, z) => {
 
@@ -48,7 +47,7 @@ export default function RestaurantsList() {
             return a.sortingValues[select] - b.sortingValues[select]
         });
 
-       y.sort(function (a, b) {
+        y.sort(function (a, b) {
             return a.sortingValues[select] - b.sortingValues[select]
         });
 
@@ -58,7 +57,6 @@ export default function RestaurantsList() {
 
        return [...x, ...y, ...z]
     }
-
 
     const sortByState = (array, a, b, c) => {
         //get the restaurants with open state
@@ -74,38 +72,6 @@ export default function RestaurantsList() {
         return [...a, ...b, ...c];
     }
 
-    const addToFavorites = (i) => {
-        //remove the restaurant from the array
-        const favRestaurant = filtered.splice(i, 1);
-        setFiltered(filtered.filter(item => item !== favRestaurant))
-
-        //push sorted favorites restaurants in an array 
-        let newListFavorites = [];
-        let openFavorites = [];
-        let orderAheadFavorites = [];
-        let closedFavorites = [];
-
-        newListFavorites.push(...fav, favRestaurant[0]);
-        sortByState(newListFavorites, openFavorites, orderAheadFavorites, closedFavorites);
-        setFav(sortedBySelect(openFavorites, orderAheadFavorites, closedFavorites));
-    }
-
-    const removeFromFavorites = (i) => {
-        //remove the restaurant from favorites list
-        const favRestaurant = fav.splice(i, 1);
-        setFav(fav.filter(item => item !== favRestaurant));
-
-        //push restaurant in the initial array 
-        let newListStateOrderedRestaurants = [];
-        let openRestaurants = [];
-        let orderAheadRestaurants= [];
-        let closedRestaurants = [];
-
-        newListStateOrderedRestaurants.push(...filtered, favRestaurant[0]);
-        sortByState(newListStateOrderedRestaurants, openRestaurants, orderAheadRestaurants, closedRestaurants);
-        setFiltered(sortedBySelect(openRestaurants, orderAheadRestaurants, closedRestaurants));
-    }
-
     return (
         <div className="list-root">
             <Filters
@@ -113,14 +79,20 @@ export default function RestaurantsList() {
                 setSearchString={setSearchString}
                 restaurants={stateOrderedRestaurants.stateOrderedRestaurants}
                 setFiltered={setFiltered}
-                filtered={filtered}
                 sortedBySelect={sortedBySelect}
                 select={select}
                 setSelect={setSelect} 
                 open={open}
                 orderAhead={orderAhead}
                 closed={closed}/>
-            <Restaurant removeFromFavorites={removeFromFavorites} addToFavorites={addToFavorites} searchString={searchString} fav={fav} data={filtered} />
+            <Restaurant 
+                filtered={filtered}
+                setFiltered={setFiltered}
+                sortByState={sortByState}
+                fav={fav} 
+                setFav={setFav}
+                sortedBySelect={sortedBySelect}
+                data={filtered} />
         </div>
     )
 }

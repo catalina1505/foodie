@@ -6,9 +6,10 @@ import {
     Select,
     Input
 } from '@material-ui/core';
+import PropTypes from 'prop-types';
 import './Filters.scss';
 
-export default function Restaurant(props) {
+export default function Filters(props) {
 
     const handleChangeSearch = e => {
         props.setSearchString(e);
@@ -27,8 +28,8 @@ export default function Restaurant(props) {
 
     const handleChangeSelect = (e) => {
         props.setSelect(e.target.value);
-        const x = props.sortedBySelect(props.open, props.orderAhead, props.closed);
-        props.setFiltered(x);
+        const sorted = props.sortedBySelect(props.open, props.orderAhead, props.closed);
+        props.setFiltered(sorted);
     }
 
     return (
@@ -51,4 +52,17 @@ export default function Restaurant(props) {
             </Grid>
         </Grid >
     )
+}
+
+Filters.propTypes = {
+    setSearchString: PropTypes.func,
+    restaurants: PropTypes.array,
+    setFiltered: PropTypes.func,
+    select: PropTypes.string,
+    setSelect: PropTypes.func,
+    sortedBySelect: PropTypes.func,
+    searchString: PropTypes.string,
+    closed: PropTypes.array,
+    open: PropTypes.array,
+    orderAhead: PropTypes.array
 }
