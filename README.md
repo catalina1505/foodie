@@ -1,10 +1,12 @@
 Foodie: responsive web-app
 
-Tech: ReactJS, Material-UI
+Tech: ReactJS with react hooks, Material-UI
+
+Prerequisites: NodeJS (https://nodejs.org/en/)
 
 Installation:
 
-https://help.github.com/articles/cloning-a-repository/;
+choose branch develop and clone the repository (https://help.github.com/articles/cloning-a-repository/);
 
 npm install;
 
