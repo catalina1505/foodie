@@ -6,7 +6,8 @@ Prerequisites: NodeJS (https://nodejs.org/en/)
 
 Installation:
 
-clone the repository (https://help.github.com/articles/cloning-a-repository/);
+clone the repository: git clone https://github.com/catalina1505/foodie.git
+(https://help.github.com/articles/cloning-a-repository/);
 
 npm install;
 
