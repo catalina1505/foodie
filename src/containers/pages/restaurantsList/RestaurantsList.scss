@@ -1,0 +1,9 @@
+.list-root {
+  margin: 20px 100px;
+}
+
+@media only screen and (max-width: 500px) {
+    .list-root {
+        margin: 0;
+      }  
+}
